@@ -12,10 +12,9 @@ import { MovieModal } from "../../../components/MovieModal";
 import { MovieFilter } from "../../../components/MovieFilter";
 import { useEffect } from "react";
 import Navbar from "../../../components/Navbar";
+import { Pagination } from "../../../components/Pagination";
 
 const SearchPageContainer = () => {
-  const { sessionId, account, isAuthenticated, handleAuthCallback } = useAuth();
-
   const {
     data: movies,
     isLoading,
@@ -23,10 +22,13 @@ const SearchPageContainer = () => {
     setSelectedMovie,
     listType,
     selectedMovie,
-
+    handlePageChange,
     handleSearch,
     handleTypeChange,
+    currentPage,
   } = useMovies();
+
+  const { sessionId, account, isAuthenticated, handleAuthCallback } = useAuth();
 
   const { toggleWatchlist, isInWatchlist } = useWatchlist(
     account?.id ?? null,
@@ -59,26 +61,11 @@ const SearchPageContainer = () => {
                 onTypeChange={handleTypeChange}
               />
             </div>
-            {/* {isAuthenticated && (
-              <button
-                onClick={() =>
-                  setCurrentView(
-                    currentView === "movies" ? "watchlist" : "movies"
-                  )
-                }
-                className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                  currentView === "watchlist"
-                    ? "bg-[#00e054] text-[#14181c]"
-                    : "bg-[#2c3440] text-gray-300 hover:bg-[#3d4754]"
-                }`}
-              >
-                <span>Watchlist</span>
-              </button>
-            )} */}
           </div>
 
           <div className="mx-auto">
             <MovieFilter
+              isAuthenticated={isAuthenticated}
               currentType={listType}
               onTypeChange={handleTypeChange}
             />
@@ -108,6 +95,12 @@ const SearchPageContainer = () => {
             onToggleWatchlist={toggleWatchlist}
           />
         )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={movies?.total_pages ?? 1}
+          onPageChange={handlePageChange}
+        />
       </main>
     </div>
   );

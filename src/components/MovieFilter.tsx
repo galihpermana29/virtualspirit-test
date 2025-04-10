@@ -6,9 +6,14 @@ import type { MovieListType } from "../types/movie";
 interface MovieFilterProps {
   currentType: MovieListType;
   onTypeChange: (type: MovieListType) => void;
+  isAuthenticated: boolean;
 }
 
-export function MovieFilter({ currentType, onTypeChange }: MovieFilterProps) {
+export function MovieFilter({
+  currentType,
+  onTypeChange,
+  isAuthenticated,
+}: MovieFilterProps) {
   return (
     <div className="flex flex-wrap items-center gap-4">
       <div className="flex flex-wrap gap-2">
@@ -42,6 +47,14 @@ export function MovieFilter({ currentType, onTypeChange }: MovieFilterProps) {
         >
           Now Playing
         </button>
+        {isAuthenticated && (
+          <a
+            href="/wishlist"
+            className={`px-4 py-2 rounded-lg transition-colors cursor-pointer bg-[#2c3440] text-gray-300 hover:bg-[#3d4754]`}
+          >
+            Watchlist
+          </a>
+        )}
       </div>
     </div>
   );

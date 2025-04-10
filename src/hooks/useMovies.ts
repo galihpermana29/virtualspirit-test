@@ -11,17 +11,17 @@ export function useMovies() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [listType, setListType] = useState<MovieListType>("popular");
-
+  const [currentPage, setCurrentPage] = useState(1);
   /**
    * Fetches movies based on search query or list type
    */
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["movies", searchQuery, listType],
+    queryKey: ["movies", searchQuery, listType, currentPage],
     queryFn: () => {
       if (searchQuery) {
-        return MovieRepository.searchMovies(searchQuery);
+        return MovieRepository.searchMovies(searchQuery, currentPage);
       }
-      return MovieRepository.getMovies(listType);
+      return MovieRepository.getMovies(listType, currentPage);
     },
   });
 
@@ -35,6 +35,11 @@ export function useMovies() {
     setSearchQuery("");
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return {
     data,
     isLoading,
@@ -46,8 +51,9 @@ export function useMovies() {
     setSearchQuery,
     setSelectedMovie,
     setListType,
-
+    handlePageChange,
     handleSearch,
     handleTypeChange,
+    currentPage,
   };
 }
