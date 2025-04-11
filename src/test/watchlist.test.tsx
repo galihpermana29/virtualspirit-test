@@ -1,0 +1,45 @@
+import "@testing-library/jest-dom";
+import { WatchlistRepository } from "../repositories/WatchlistRepository";
+import { beforeEach, describe, expect, test, vi } from "vitest";
+
+vi.mock("../repositories/WatchlistRepository");
+
+describe("Watchlist Functionality", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(WatchlistRepository.addToWatchlist).mockResolvedValue();
+    vi.mocked(WatchlistRepository.removeFromWatchlist).mockResolvedValue();
+  });
+
+  test("should add movie to watchlist", async () => {
+    const accountId = 123;
+    const sessionId = "test-session";
+    const movieId = 1;
+
+    await WatchlistRepository.addToWatchlist(accountId, movieId, sessionId);
+
+    expect(WatchlistRepository.addToWatchlist).toHaveBeenCalledWith(
+      accountId,
+      movieId,
+      sessionId
+    );
+  });
+
+  test("should remove movie from watchlist", async () => {
+    const accountId = 123;
+    const sessionId = "test-session";
+    const movieId = 1;
+
+    await WatchlistRepository.removeFromWatchlist(
+      accountId,
+      movieId,
+      sessionId
+    );
+
+    expect(WatchlistRepository.removeFromWatchlist).toHaveBeenCalledWith(
+      accountId,
+      movieId,
+      sessionId
+    );
+  });
+});
