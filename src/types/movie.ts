@@ -8,6 +8,7 @@ export const MovieSchema = z.object({
   release_date: z.string(),
   vote_average: z.number(),
   vote_count: z.number(),
+  genre_ids: z.array(z.number()),
 });
 
 export type Movie = z.infer<typeof MovieSchema>;
@@ -72,3 +73,19 @@ export type Account = z.infer<typeof AccountSchema>;
 
 export const WatchlistResponseSchema = MovieSearchResponseSchema;
 export type WatchlistResponse = z.infer<typeof WatchlistResponseSchema>;
+
+export const FavoriteResponseSchema = MovieSearchResponseSchema;
+export type FavoriteResponse = z.infer<typeof FavoriteResponseSchema>;
+
+export const GenreSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+export type Genre = z.infer<typeof GenreSchema>;
+
+export const GenreListSchema = z.object({
+  genres: z.array(GenreSchema),
+});
+
+export type GenreList = z.infer<typeof GenreListSchema>;

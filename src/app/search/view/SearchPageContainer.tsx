@@ -4,8 +4,8 @@
  */
 import { useMovies } from "../../../hooks/useMovies";
 import { useWatchlist } from "../../../hooks/useWatchlist";
-
-import { useAuth } from "../../../hooks/useAuth";
+import { useFavorites } from "../../../hooks/useFavorites";
+import { useAuth } from "../../../hooks/authContext";
 import { SearchBar } from "../../../components/SearchBar";
 import { MovieGrid } from "../../../components/MovieGrid";
 import { MovieModal } from "../../../components/MovieModal";
@@ -35,7 +35,11 @@ const SearchPageContainer = () => {
     sessionId
   );
 
-  // Check for auth callback
+  const { toggleFavorite, isInFavorites } = useFavorites(
+    account?.id ?? null,
+    sessionId
+  );
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const requestToken = urlParams.get("request_token");
@@ -50,10 +54,8 @@ const SearchPageContainer = () => {
   return (
     <div className="min-h-screen bg-[#14181c]">
       <Navbar />
-      {/* Main content */}
       <main className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col gap-6 mb-8">
-          {/* Search and filters */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <div className="flex-grow">
               <SearchBar
@@ -72,7 +74,6 @@ const SearchPageContainer = () => {
           </div>
         </div>
 
-        {/* Movie grid or watchlist */}
         <div className="min-h-[60vh]">
           <MovieGrid
             movies={movies?.results ?? []}
@@ -81,18 +82,21 @@ const SearchPageContainer = () => {
             onMovieClick={setSelectedMovie}
             isAuthenticated={isAuthenticated}
             onToggleWatchlist={toggleWatchlist}
+            onToggleFavorite={toggleFavorite}
             isInWatchlist={isInWatchlist}
+            isInFavorites={isInFavorites}
           />
         </div>
 
-        {/* Movie modal */}
         {selectedMovie && (
           <MovieModal
             movie={selectedMovie}
             onClose={() => setSelectedMovie(null)}
             isInWatchlist={isInWatchlist(selectedMovie.id)}
+            isInFavorites={isInFavorites(selectedMovie.id)}
             isAuthenticated={isAuthenticated}
             onToggleWatchlist={toggleWatchlist}
+            onToggleFavorite={toggleFavorite}
           />
         )}
 

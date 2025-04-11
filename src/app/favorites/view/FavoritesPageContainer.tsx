@@ -3,13 +3,19 @@ import { MovieModal } from "../../../components/MovieModal";
 import Navbar from "../../../components/Navbar";
 import { useAuth } from "../../../hooks/authContext";
 import { useMovies } from "../../../hooks/useMovies";
+import { useFavorites } from "../../../hooks/useFavorites";
 import { useWatchlist } from "../../../hooks/useWatchlist";
 
-const WishlistPageContainer = () => {
+const FavoritesPageContainer = () => {
   const { sessionId, account, isAuthenticated } = useAuth();
 
-  const { watchlistData, isLoading, error, toggleWatchlist, isInWatchlist } =
-    useWatchlist(account?.id ?? null, sessionId);
+  const { favoritesData, isLoading, error, toggleFavorite, isInFavorites } =
+    useFavorites(account?.id ?? null, sessionId);
+
+  const { toggleWatchlist, isInWatchlist } = useWatchlist(
+    account?.id ?? null,
+    sessionId
+  );
 
   const { setSelectedMovie, selectedMovie } = useMovies();
 
@@ -20,40 +26,40 @@ const WishlistPageContainer = () => {
         {isLoading && (
           <div className="text-center text-gray-400">Loading...</div>
         )}
-
         {!error && !isLoading && (
           <>
-            {/* Main content */}
             <main className="max-w-7xl mx-auto px-4 py-6">
-              {watchlistData?.results?.length! > 0 ? (
+              {favoritesData?.results?.length! > 0 ? (
                 <div className="movie-grid">
-                  {watchlistData?.results?.map((movie) => (
+                  {favoritesData?.results.map((movie) => (
                     <MovieCard
                       key={movie.id}
                       movie={movie}
                       onClick={setSelectedMovie}
-                      isInWatchlist={true}
+                      isInFavorites={true}
+                      isInWatchlist={isInWatchlist(movie.id)}
                       isAuthenticated={true}
                       onToggleWatchlist={toggleWatchlist}
+                      onToggleFavorite={toggleFavorite}
                     />
                   ))}
                 </div>
               ) : (
-                <div className="text-center text-gray-400 w-full">
+                <div className="text-center text-gray-400">
                   Your favorites list is empty. Start adding movies!
                 </div>
               )}
             </main>
 
-            {/* Movie modal */}
             {selectedMovie && (
               <MovieModal
-                onToggleFavorite={toggleWatchlist}
                 movie={selectedMovie}
                 onClose={() => setSelectedMovie(null)}
                 isInWatchlist={isInWatchlist(selectedMovie.id)}
+                isInFavorites={isInFavorites(selectedMovie.id)}
                 isAuthenticated={isAuthenticated}
                 onToggleWatchlist={toggleWatchlist}
+                onToggleFavorite={toggleFavorite}
               />
             )}
           </>
@@ -63,4 +69,4 @@ const WishlistPageContainer = () => {
   );
 };
 
-export default WishlistPageContainer;
+export default FavoritesPageContainer;

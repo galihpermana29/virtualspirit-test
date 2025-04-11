@@ -1,7 +1,7 @@
 import { Film, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { AuthButton } from "./AuthButton";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/authContext";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

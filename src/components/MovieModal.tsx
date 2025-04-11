@@ -3,15 +3,17 @@
  */
 import React from "react";
 import { useMovieReviews } from "../hooks/useMovieReviews";
-import { X, Star, Calendar, Clock, Bookmark } from "lucide-react";
+import { X, Star, Calendar, Clock, Bookmark, Heart } from "lucide-react";
 import type { Movie } from "../types/movie";
 
 interface MovieModalProps {
   movie: Movie;
   onClose: () => void;
   isInWatchlist: boolean;
+  isInFavorites?: boolean;
   isAuthenticated: boolean;
   onToggleWatchlist: (movie: Movie) => void;
+  onToggleFavorite: (movie: Movie) => Promise<void>;
 }
 
 export function MovieModal({
@@ -20,6 +22,8 @@ export function MovieModal({
   isInWatchlist,
   isAuthenticated,
   onToggleWatchlist,
+  isInFavorites,
+  onToggleFavorite,
 }: MovieModalProps) {
   const { data: reviewsData, isLoading: isLoadingReviews } = useMovieReviews(
     movie.id
@@ -49,6 +53,19 @@ export function MovieModal({
             {movie.title}
           </h2>
           <div className="flex items-center gap-2">
+            {isAuthenticated && (
+              <button
+                onClick={() => onToggleFavorite(movie)}
+                className={`p-2 rounded-lg transition-colors ${
+                  isInFavorites
+                    ? "bg-[#00e054] text-[#14181c]"
+                    : "bg-[#2c3440] text-gray-300 hover:bg-[#3d4754]"
+                }`}
+                aria-label="Toggle watchlist"
+              >
+                <Heart className="h-5 w-5" />
+              </button>
+            )}
             {isAuthenticated && (
               <button
                 onClick={() => onToggleWatchlist(movie)}

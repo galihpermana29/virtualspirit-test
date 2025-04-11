@@ -1,21 +1,26 @@
 import { Star } from "lucide-react";
 import type { Movie } from "../types/movie";
 import { WatchlistButton } from "./WatchlistButton";
+import { FavoriteButton } from "./FavoriteButton";
 
 interface MovieCardProps {
   movie: Movie;
   onClick: (movie: Movie) => void;
   isInWatchlist?: boolean;
+  isInFavorites?: boolean;
   isAuthenticated?: boolean;
   onToggleWatchlist?: (movie: Movie) => void;
+  onToggleFavorite?: (movie: Movie) => void;
 }
 
 export function MovieCard({
   movie,
   onClick,
   isInWatchlist = false,
+  isInFavorites = false,
   isAuthenticated = false,
   onToggleWatchlist = () => {},
+  onToggleFavorite = () => {},
 }: MovieCardProps) {
   return (
     <div
@@ -34,12 +39,22 @@ export function MovieCard({
           <span className="text-gray-500">No image</span>
         </div>
       )}
-      <WatchlistButton
-        movie={movie}
-        isInWatchlist={isInWatchlist}
-        isAuthenticated={isAuthenticated}
-        onToggleWatchlist={onToggleWatchlist}
-      />
+      <div className="absolute top-2 right-2 flex flex-col gap-2">
+        <WatchlistButton
+          movie={movie}
+          isInWatchlist={isInWatchlist}
+          isAuthenticated={isAuthenticated}
+          onToggleWatchlist={onToggleWatchlist}
+        />
+      </div>
+      <div className="absolute top-4 left-2 flex flex-col gap-2">
+        <FavoriteButton
+          movie={movie}
+          isInFavorites={isInFavorites}
+          isAuthenticated={isAuthenticated}
+          onToggleFavorite={onToggleFavorite}
+        />
+      </div>
       <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-b-md">
         <h3 className="text-white font-medium text-sm mb-1 line-clamp-1">
           {movie.title}

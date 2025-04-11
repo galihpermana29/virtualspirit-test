@@ -11,7 +11,9 @@ interface MovieGridProps {
   onMovieClick: (movie: Movie) => void;
   isAuthenticated: boolean;
   onToggleWatchlist: (movie: Movie) => void;
+  onToggleFavorite: (movie: Movie) => void;
   isInWatchlist: (movieId: number) => boolean;
+  isInFavorites: (movieId: number) => boolean;
 }
 
 export function MovieGrid({
@@ -21,7 +23,9 @@ export function MovieGrid({
   onMovieClick,
   isAuthenticated,
   onToggleWatchlist,
+  onToggleFavorite,
   isInWatchlist,
+  isInFavorites,
 }: MovieGridProps) {
   if (isLoading) {
     return <div className="text-center text-gray-400">Loading...</div>;
@@ -39,12 +43,14 @@ export function MovieGrid({
     <div className="movie-grid">
       {movies.map((movie) => (
         <MovieCard
+          isInFavorites={isInFavorites(movie.id)}
           key={movie.id}
           movie={movie}
           onClick={onMovieClick}
           isInWatchlist={isInWatchlist(movie.id)}
           isAuthenticated={isAuthenticated}
           onToggleWatchlist={onToggleWatchlist}
+          onToggleFavorite={onToggleFavorite}
         />
       ))}
     </div>
