@@ -2,9 +2,9 @@
  * Modal component for displaying detailed movie information
  */
 import React from "react";
-import { useMovieReviews } from "../hooks/useMovieReviews";
+import { useMovieReviews } from "../app/movie/usecase/useMovieReviews";
 import { X, Star, Calendar, Clock, Bookmark, Heart } from "lucide-react";
-import type { Movie } from "../types/movie";
+import { Movie } from "../app/movie/models/types";
 
 interface MovieModalProps {
   movie: Movie;

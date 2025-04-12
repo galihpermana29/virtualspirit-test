@@ -4,7 +4,7 @@
  */
 import { useQuery } from "@tanstack/react-query";
 import { MovieRepository } from "../repositories/MovieRepository";
-import type { Movie, MovieListType } from "../types/movie";
+import type { Movie, MovieListType } from "../models/types";
 import { useState } from "react";
 
 export function useMovies() {
@@ -12,6 +12,7 @@ export function useMovies() {
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [listType, setListType] = useState<MovieListType>("popular");
   const [currentPage, setCurrentPage] = useState(1);
+
   /**
    * Fetches movies based on search query or list type
    */

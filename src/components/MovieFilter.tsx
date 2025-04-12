@@ -1,7 +1,8 @@
 /**
  * Filter component for movie list types
  */
-import type { MovieListType } from "../types/movie";
+
+import { MovieListType } from "../app/movie/models/types";
 
 interface MovieFilterProps {
   currentType: MovieListType;
@@ -53,6 +54,15 @@ export function MovieFilter({
             className={`px-4 py-2 rounded-lg transition-colors cursor-pointer bg-[#2c3440] text-gray-300 hover:bg-[#3d4754]`}
           >
             Watchlist
+          </a>
+        )}
+
+        {isAuthenticated && (
+          <a
+            href="/favorite"
+            className={`px-4 py-2 rounded-lg transition-colors cursor-pointer bg-[#2c3440] text-gray-300 hover:bg-[#3d4754]`}
+          >
+            Favorite
           </a>
         )}
       </div>

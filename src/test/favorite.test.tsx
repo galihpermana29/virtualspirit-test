@@ -1,8 +1,8 @@
-import { FavoriteRepository } from "../repositories/FavoriteRepository";
+import { FavoriteRepository } from "../app/favorites/repositories/FavoriteRepository";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import "@testing-library/jest-dom";
 
-vi.mock("../repositories/FavoriteRepository");
+vi.mock("../app/favorites/repositories/FavoriteRepository");
 
 describe("Favorites Functionality", () => {
   beforeEach(() => {

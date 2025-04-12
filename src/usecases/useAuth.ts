@@ -1,21 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+/**
+ * Custom hook for handling authentication state and operations
+ * Manages user session, account details, and authentication flow
+ */
+import { useState, useEffect } from "react";
 import { AuthRepository } from "../repositories/AuthRepository";
-import type { Account } from "../types/movie";
+import type { Account } from "../models/movie";
 
-interface AuthContextProps {
-  sessionId: string | null;
-  account: Account | null;
-  isAuthenticated: boolean;
-  handleLogin: () => Promise<void>;
-  handleLogout: () => void;
-  handleAuthCallback: (requestToken: string) => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export function useAuth() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
 
@@ -29,6 +20,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, []);
 
+  /**
+   * Initiates the login flow by creating a request token and redirecting to TMDB
+   */
   const handleLogin = async () => {
     try {
       const { request_token } = await AuthRepository.createRequestToken();
@@ -38,20 +32,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  /**
+   * Handles user logout by clearing session data
+   */
   const handleLogout = () => {
     setSessionId(null);
     setAccount(null);
     localStorage.removeItem("tmdb_session_id");
-    window.location.reload();
   };
 
+  /**
+   * Processes the authentication callback after TMDB redirect
+   */
   const handleAuthCallback = async (requestToken: string) => {
     try {
       const { session_id } = await AuthRepository.createSession(requestToken);
       setSessionId(session_id);
       localStorage.setItem("tmdb_session_id", session_id);
-      window.location.reload();
-
       const accountData = await AuthRepository.getAccount(session_id);
       setAccount(accountData);
     } catch (error) {
@@ -59,26 +56,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        sessionId,
-        account,
-        isAuthenticated: !!sessionId,
-        handleLogin,
-        handleLogout,
-        handleAuthCallback,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-export const useAuth = (): AuthContextProps => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+  return {
+    sessionId,
+    account,
+    isAuthenticated: !!sessionId,
+    handleLogin,
+    handleLogout,
+    handleAuthCallback,
+  };
+}

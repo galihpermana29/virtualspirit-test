@@ -5,9 +5,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { Routes, Route } from "react-router-dom";
 
-import SearchPageContainer from "./app/search/view/SearchPageContainer";
-import WishlistPageContainer from "./app/wishlist/view/WishlistPageContainer";
-import { AuthProvider } from "./hooks/authContext";
+import SearchPageContainer from "./app/movie/view/SearchPageContainer";
+import WishlistPageContainer from "./app/watchlist/view/WishlistPageContainer";
+import { AuthProvider } from "./usecases/authContext";
+import FavoritesPageContainer from "./app/favorites/view/FavoritesPageContainer";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchPageContainer />} />
           <Route path="/wishlist" element={<WishlistPageContainer />} />
+          <Route path="/favorite" element={<FavoritesPageContainer />} />
         </Routes>
       </AuthProvider>
     </QueryClientProvider>

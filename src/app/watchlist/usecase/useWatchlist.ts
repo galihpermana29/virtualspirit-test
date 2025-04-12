@@ -3,8 +3,8 @@
  */
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Movie } from "../../movie/models/types";
 import { WatchlistRepository } from "../repositories/WatchlistRepository";
-import type { Movie } from "../types/movie";
 
 export function useWatchlist(
   accountId: number | null,

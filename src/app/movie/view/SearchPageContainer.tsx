@@ -2,10 +2,10 @@
  * Container component for movie search functionality
  * Handles business logic and state management
  */
-import { useMovies } from "../../../hooks/useMovies";
-import { useWatchlist } from "../../../hooks/useWatchlist";
-import { useFavorites } from "../../../hooks/useFavorites";
-import { useAuth } from "../../../hooks/authContext";
+import { useMovies } from "../usecase/useMovies";
+import { useWatchlist } from "../../watchlist/usecase/useWatchlist";
+import { useFavorites } from "../../favorites/usecase/useFavorites";
+import { useAuth } from "../../../usecases/authContext";
 import { SearchBar } from "../../../components/SearchBar";
 import { MovieGrid } from "../../../components/MovieGrid";
 import { MovieModal } from "../../../components/MovieModal";
@@ -15,6 +15,10 @@ import Navbar from "../../../components/Navbar";
 import { Pagination } from "../../../components/Pagination";
 
 const SearchPageContainer = () => {
+  /**
+   * Fetch movies based on the current search query and page
+   * Set the selected movie to the first movie in the results
+   */
   const {
     data: movies,
     isLoading,
@@ -40,6 +44,11 @@ const SearchPageContainer = () => {
     sessionId
   );
 
+  /**
+   * Handle the authentication callback from the TMDB redirect
+   * Redirect the user to the home page if the request token is invalid
+   * Update the session ID and account details in the context
+   */
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const requestToken = urlParams.get("request_token");

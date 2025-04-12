@@ -1,5 +1,5 @@
 import { Bookmark } from "lucide-react";
-import type { Movie } from "../types/movie";
+import { Movie } from "../app/movie/models/types";
 
 interface WatchlistButtonProps {
   movie: Movie;

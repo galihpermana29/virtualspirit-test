@@ -3,7 +3,7 @@
  */
 import React, { useState } from "react";
 import { Search } from "lucide-react";
-import { MovieListType } from "../types/movie";
+import { MovieListType } from "../app/movie/models/types";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;

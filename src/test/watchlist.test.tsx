@@ -1,14 +1,20 @@
 import "@testing-library/jest-dom";
-import { WatchlistRepository } from "../repositories/WatchlistRepository";
 import { beforeEach, describe, expect, test, vi } from "vitest";
+import { WatchlistRepository } from "../app/watchlist/repositories/WatchlistRepository";
 
-vi.mock("../repositories/WatchlistRepository");
+vi.mock("../app/watchlist/repositories/WatchlistRepository");
 
 describe("Watchlist Functionality", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(WatchlistRepository.addToWatchlist).mockResolvedValue();
-    vi.mocked(WatchlistRepository.removeFromWatchlist).mockResolvedValue();
+    // vi.mocked(WatchlistRepository.addToWatchlist).mockResolvedValue();
+    // vi.mocked(WatchlistRepository.removeFromWatchlist).mockResolvedValue();
+
+    // Or better (if using Vitest properly typed):
+    vi.mocked(WatchlistRepository).addToWatchlist.mockResolvedValue(undefined);
+    vi.mocked(WatchlistRepository).removeFromWatchlist.mockResolvedValue(
+      undefined
+    );
   });
 
   test("should add movie to watchlist", async () => {

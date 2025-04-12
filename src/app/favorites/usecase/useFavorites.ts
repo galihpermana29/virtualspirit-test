@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Movie } from "../types/movie";
 import { FavoriteRepository } from "../repositories/FavoriteRepository";
+import { Movie } from "../../movie/models/types";
 
+/**
+ * Function useFavorites returns a set of favorite movies for a user
+ * @param accountId
+ * @param sessionId
+ * @returns
+ */
 export function useFavorites(
   accountId: number | null,
   sessionId: string | null
 ) {
+  /**
+   * Fetch favorites from the API
+   * If the user is not authenticated, return null
+   * If the user is authenticated, fetch favorites from the API
+   */
   const {
     data: favoritesData,
     isLoading,
@@ -23,6 +34,14 @@ export function useFavorites(
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const queryClient = useQueryClient();
 
+  /**
+   * This function toggles a movie's favorite status
+   * If the movie is already in the favorites, it removes it
+   * If the movie is not in the favorites, it adds it
+   * Updates the favorites set and invalidates the query
+   * @param movie
+   * @returns
+   */
   const toggleFavorite = async (movie: Movie) => {
     if (!accountId || !sessionId) return;
 

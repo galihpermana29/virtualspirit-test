@@ -1,13 +1,13 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
-import { MovieRepository } from "../repositories/MovieRepository";
-import SearchPageContainer from "../app/search/view/SearchPageContainer";
+import SearchPageContainer from "../app/movie/view/SearchPageContainer";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { AuthProvider } from "../hooks/authContext";
+import { AuthProvider } from "../usecases/authContext";
 import "@testing-library/jest-dom";
+import { MovieRepository } from "../app/movie/repositories/MovieRepository";
 
-vi.mock("../repositories/MovieRepository");
+vi.mock("../app/movie/repositories/MovieRepository");
 
 const mockMovies = {
   page: 1,

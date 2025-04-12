@@ -1,11 +1,11 @@
 /**
  * Repository class for handling watchlist-related API operations
  */
-import { WatchlistResponse, WatchlistResponseSchema } from '../types/movie';
+import { WatchlistResponse, WatchlistResponseSchema } from "../models/types";
 
 export class WatchlistRepository {
-  private static readonly API_KEY = '4af3e2d03c3c2718eca6d1f809a1a79d';
-  private static readonly BASE_URL = 'https://api.themoviedb.org/3';
+  private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
+  private static readonly BASE_URL = "https://api.themoviedb.org/3";
 
   /**
    * Adds a movie to user's watchlist
@@ -18,12 +18,12 @@ export class WatchlistRepository {
     const response = await fetch(
       `${this.BASE_URL}/account/${accountId}/watchlist?api_key=${this.API_KEY}&session_id=${sessionId}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          media_type: 'movie',
+          media_type: "movie",
           media_id: movieId,
           watchlist: true,
         }),
@@ -31,7 +31,7 @@ export class WatchlistRepository {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to add movie to watchlist');
+      throw new Error("Failed to add movie to watchlist");
     }
   }
 
@@ -46,12 +46,12 @@ export class WatchlistRepository {
     const response = await fetch(
       `${this.BASE_URL}/account/${accountId}/watchlist?api_key=${this.API_KEY}&session_id=${sessionId}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          media_type: 'movie',
+          media_type: "movie",
           media_id: movieId,
           watchlist: false,
         }),
@@ -59,7 +59,7 @@ export class WatchlistRepository {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to remove movie from watchlist');
+      throw new Error("Failed to remove movie from watchlist");
     }
   }
 
@@ -76,7 +76,7 @@ export class WatchlistRepository {
     );
 
     if (!response.ok) {
-      throw new Error('Failed to fetch watchlist');
+      throw new Error("Failed to fetch watchlist");
     }
 
     const data = await response.json();

@@ -1,9 +1,18 @@
-import { FavoriteResponse, FavoriteResponseSchema } from "../types/movie";
+import { FavoriteResponse, FavoriteResponseSchema } from "../models/types";
 
+/**
+ * Repository class for handling favorites-related API operations
+ */
 export class FavoriteRepository {
   private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
   private static readonly BASE_URL = "https://api.themoviedb.org/3";
 
+  /**
+   * Function to add a movie to the user's favorites
+   * @param accountId
+   * @param movieId
+   * @param sessionId
+   */
   static async addToFavorites(
     accountId: number,
     movieId: number,
@@ -29,6 +38,12 @@ export class FavoriteRepository {
     }
   }
 
+  /**
+   * Function to remove a movie from the user's favorites
+   * @param accountId
+   * @param movieId
+   * @param sessionId
+   */
   static async removeFromFavorites(
     accountId: number,
     movieId: number,
@@ -54,6 +69,13 @@ export class FavoriteRepository {
     }
   }
 
+  /**
+   * Function to fetch a user's favorites
+   * @param accountId
+   * @param sessionId
+   * @param page
+   * @returns
+   */
   static async getFavorites(
     accountId: number,
     sessionId: string,

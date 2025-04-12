@@ -1,8 +1,8 @@
 /**
  * Presentation component for displaying a grid of movies
  */
+import { Movie } from "../app/movie/models/types";
 import { MovieCard } from "./MovieCard";
-import type { Movie } from "../types/movie";
 
 interface MovieGridProps {
   movies: Movie[];

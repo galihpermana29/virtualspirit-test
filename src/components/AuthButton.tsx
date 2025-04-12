@@ -1,5 +1,5 @@
 import { LogIn, LogOut, User } from "lucide-react";
-import type { Account } from "../types/movie";
+import type { Account } from "../models/movie";
 
 interface AuthButtonProps {
   isAuthenticated: boolean;

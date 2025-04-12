@@ -1,9 +1,9 @@
 import { MovieCard } from "../../../components/MovieCard";
 import { MovieModal } from "../../../components/MovieModal";
 import Navbar from "../../../components/Navbar";
-import { useAuth } from "../../../hooks/authContext";
-import { useMovies } from "../../../hooks/useMovies";
-import { useWatchlist } from "../../../hooks/useWatchlist";
+import { useAuth } from "../../../usecases/authContext";
+import { useMovies } from "../../movie/usecase/useMovies";
+import { useWatchlist } from "../usecase/useWatchlist";
 
 const WishlistPageContainer = () => {
   const { sessionId, account, isAuthenticated } = useAuth();

@@ -1,22 +1,34 @@
 import { MovieCard } from "../../../components/MovieCard";
 import { MovieModal } from "../../../components/MovieModal";
 import Navbar from "../../../components/Navbar";
-import { useAuth } from "../../../hooks/authContext";
-import { useMovies } from "../../../hooks/useMovies";
-import { useFavorites } from "../../../hooks/useFavorites";
-import { useWatchlist } from "../../../hooks/useWatchlist";
+import { useAuth } from "../../../usecases/authContext";
+import { useMovies } from "../../movie/usecase/useMovies";
+import { useFavorites } from "../usecase/useFavorites";
+import { useWatchlist } from "../../watchlist/usecase/useWatchlist";
 
 const FavoritesPageContainer = () => {
+  /**
+   * Get the user's session ID and account details from the context
+   */
   const { sessionId, account, isAuthenticated } = useAuth();
 
+  /**
+   * Get the user's favorites data and functions from the context
+   */
   const { favoritesData, isLoading, error, toggleFavorite, isInFavorites } =
     useFavorites(account?.id ?? null, sessionId);
 
+  /**
+   * Get the user's watchlist data and functions from the context
+   */
   const { toggleWatchlist, isInWatchlist } = useWatchlist(
     account?.id ?? null,
     sessionId
   );
 
+  /**
+   * Use the selected movie state from the movie context
+   */
   const { setSelectedMovie, selectedMovie } = useMovies();
 
   return (

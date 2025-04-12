@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { MovieCard } from "./MovieCard";
-import type { Movie } from "../types/movie";
 
-import { WatchlistRepository } from "../repositories/WatchlistRepository";
+import { Movie } from "../app/movie/models/types";
+import { WatchlistRepository } from "../app/watchlist/repositories/WatchlistRepository";
 
 interface WatchlistPageProps {
   accountId: number;
