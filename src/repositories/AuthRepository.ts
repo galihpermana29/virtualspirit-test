@@ -9,10 +9,11 @@ import {
   Account,
   AccountSchema,
 } from "../models/movie";
+import { apiURL, tmdbAPIKey } from "../models/variables";
 
 export class AuthRepository {
-  private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
-  private static readonly BASE_URL = "https://api.themoviedb.org/3";
+  private static readonly API_KEY = tmdbAPIKey;
+  private static readonly BASE_URL = apiURL;
 
   /**
    * Creates a new request token for authentication

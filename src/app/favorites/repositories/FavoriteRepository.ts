@@ -1,11 +1,12 @@
+import { apiURL, tmdbAPIKey } from "../../../models/variables";
 import { FavoriteResponse, FavoriteResponseSchema } from "../models/types";
 
 /**
  * Repository class for handling favorites-related API operations
  */
 export class FavoriteRepository {
-  private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
-  private static readonly BASE_URL = "https://api.themoviedb.org/3";
+  private static readonly API_KEY = tmdbAPIKey;
+  private static readonly BASE_URL = apiURL;
 
   /**
    * Function to add a movie to the user's favorites

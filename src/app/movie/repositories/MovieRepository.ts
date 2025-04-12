@@ -1,6 +1,7 @@
 /**
  * Repository class for handling movie-related API operations
  */
+import { apiURL, tmdbAPIKey } from "../../../models/variables";
 import {
   MovieSearchResponse,
   MovieSearchResponseSchema,
@@ -10,8 +11,8 @@ import {
 } from "../models/types";
 
 export class MovieRepository {
-  private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
-  private static readonly BASE_URL = "https://api.themoviedb.org/3";
+  private static readonly API_KEY = tmdbAPIKey;
+  private static readonly BASE_URL = apiURL;
 
   /**
    * Searches for movies based on a query string

@@ -1,11 +1,12 @@
 /**
  * Repository class for handling watchlist-related API operations
  */
+import { apiURL, tmdbAPIKey } from "../../../models/variables";
 import { WatchlistResponse, WatchlistResponseSchema } from "../models/types";
 
 export class WatchlistRepository {
-  private static readonly API_KEY = "4af3e2d03c3c2718eca6d1f809a1a79d";
-  private static readonly BASE_URL = "https://api.themoviedb.org/3";
+  private static readonly API_KEY = tmdbAPIKey;
+  private static readonly BASE_URL = apiURL;
 
   /**
    * Adds a movie to user's watchlist
