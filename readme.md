@@ -6,8 +6,6 @@ This project is created in terms of job test from VirtualSpirit for Frontend Dev
 
 https://fanatical-music-bab.notion.site/VirtualSpirit-Frontend-Test-Documentation-1d34218dbc188003a858da396d6e8dc4
 
-![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image.png)
-
 ## Package Details
 
 - React 18 + Vite
