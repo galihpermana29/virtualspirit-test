@@ -36,27 +36,3 @@ https://fanatical-music-bab.notion.site/VirtualSpirit-Frontend-Test-Documentatio
 ## Folder Structure
 
 [How To Achieve Agile Programming with React](https://medium.com/@galihcbn123/how-to-achieve-agile-programming-with-react-be5dd29cb312)
-
-## Feature
-
-1. Authentication
-
-   ![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image%201.png)
-
-   Login with TMDB Account, callback and redirected back to the app
-
-2. Search any movies & see upcoming, popular, and now playing movies
-
-   ![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image%202.png)
-
-3. See details of movies and 3 latest reviews of the movie
-
-   ![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image%203.png)
-
-4. Add and Remove from Watchlist
-
-   ![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image%204.png)
-
-5. Add and Remove from Favorite
-
-   ![image.png](VirtualSpirit%20Frontend%20Test%20Documentation%201d34218dbc188003a858da396d6e8dc4/image%205.png)
